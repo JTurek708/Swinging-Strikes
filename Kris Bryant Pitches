@@ -1,0 +1,17 @@
+# Amount & Types of Pitches seen by Kris Bryant
+pitch_table <- kb_statcast %>%
+  group_by(pitch_type) %>%
+  summarise(N = n()) %>%
+  mutate(Pct = N / sum(N)) %>%
+  arrange(desc(N))
+
+pitch_table
+Pitch <- c("Changeup", "Curveball", "Cutter", "Four Seam Fastball", "Splitter", "Knuckle Curve", "Sinker", "Slider")
+# Barchart of pitches seen by Kris Bryant
+kb_chart <- ggplot(pitch_table, aes(pitch_type, N, fill = pitch_type)) + 
+  geom_bar(stat = "identity") +
+  xlab("Pitch Type") + 
+  ylab("Count") +
+  ggtitle("Number of Pitches Seen by KB by Pitch Type") 
+  
+kb_chart
