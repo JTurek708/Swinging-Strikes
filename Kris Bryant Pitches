@@ -15,3 +15,19 @@ kb_chart <- ggplot(pitch_table, aes(pitch_type, N, fill = pitch_type)) +
   ggtitle("Number of Pitches Seen by KB by Pitch Type") 
   
 kb_chart
+
+
+# K-Zone plot of Four-seam Fastballs
+k_zone_plot_KB_FF <- ggplot(kb_fastball, aes(x = plate_x, y = plate_z)) +
+  geom_rect(xmin = -0.947, xmax = 0.947, ymin = 1.5,
+            ymax = 3.6, fill = "black", alpha = 0.01) +
+  coord_equal() +
+  scale_x_continuous("Horizontal Location (ft.)",
+                     limits = c(-2, 2)) + 
+  scale_y_continuous("Vertical Location (ft)",
+                     limits = c(0, 5))
+k_zone_plot_KB_FF +
+  geom_point(aes(color = factor(description))) + 
+  scale_color_manual(values = c("blue", "blue"),
+                     labels = c("KB Swinging Strikes", "2021")) +
+  labs(title = "Kris Bryant Swinging Strikes FF")
